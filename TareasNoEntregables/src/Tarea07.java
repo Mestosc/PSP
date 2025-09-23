@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 public class Tarea07 {
     public static void main(String[] args) {
-        ejecutarArchivoPython();
+        if (ejecutarArchivoPython()!=0) {
+            System.err.println("El programa ha fallado");
+        }
     }
 
-    private static void ejecutarArchivoPython() {
+    private static int ejecutarArchivoPython() {
         ArrayList<String> comandos = new ArrayList<>();
         comandos.add("python");
         comandos.add("src/hola.py");
@@ -21,8 +23,12 @@ public class Tarea07 {
                     System.out.println(linea);
                 }
             }
+            return p.waitFor();
         } catch (IOException e) {
-            System.out.println("Problema en la entrada salida");
+            System.err.println("Problema en la entrada salida " + e);
+        } catch (InterruptedException e) {
+            System.err.println("Interrupcion " + e);
         }
+        return -1;
     }
 }
