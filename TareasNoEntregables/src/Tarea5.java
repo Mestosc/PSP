@@ -27,9 +27,11 @@ public class Tarea5 {
             pb.inheritIO();
             try {
                 Process p = pb.start();
-                estado = p.exitValue();
+                estado = p.waitFor();
             } catch (IOException e) {
                 System.out.println("Error Entrada salida " + e);
+            } catch (InterruptedException e) {
+                System.out.println("Interrumpido");
             }
         }
         sc.close();
