@@ -7,12 +7,13 @@ import java.util.List;
 public class LanzadorProceso {
     /**
      * Lanzamos un ping a un sitio web
+     * @param herramienta la herramienta que quieres usar
      * @param sitio el sitio web al que lanzamos el ping
      */
-    public static void lanzarPing(String sitio) {
+    public static void lanzarPing(String herramienta,String sitio) {
         String error = "\033[31m[ERROR] \033[37m";
         String ok = "\033[32m[OK] \033[37m";
-        ArrayList<String> proceso = obtenerComandoFinalHerramienta("ping",sitio);
+        ArrayList<String> proceso = obtenerComandoFinalHerramienta(herramienta,sitio);
         if (!proceso.isEmpty()) {
             ProcessBuilder pb = new ProcessBuilder(proceso);
             //pb.redirectOutput(new File("print_output.log")); // Redireccion de output a fichero, lo dejo aqui para quede constancia de que lo he hecho y funciona sin fallo ninguno si quiero que aparezca el OK, tendria que hacerlo de otra manera con un metodo aparte
