@@ -1,5 +1,5 @@
 import java.io.BufferedReader;
-import java.io.File;
+//import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -17,7 +17,7 @@ public class Main {
             proceso.add(1,"-c");
         }
         ProcessBuilder pb = new ProcessBuilder(proceso);
-        // pb.redirectOutput(new File("print_output.log")); // Redireccion de output a fichero
+        //pb.redirectOutput(new File("print_output.log")); // Redireccion de output a fichero
         //pb.redirectError(new File("ping_error.log")); // Redireccion de errores a fichero
         try {
             Process p = pb.start();
