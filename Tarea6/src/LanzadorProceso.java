@@ -85,7 +85,9 @@ public class LanzadorProceso {
      */
     private static void informacionRequerimientosArchivo(String file,String informacion) {
         try (PrintWriter writer = new PrintWriter(new FileOutputStream(file,true))) {
-            informacion = informacion.replaceAll("\033\\[[;\\d]*m", "");
+            if (informacion.contains("\033[")) {
+                informacion = informacion.replaceAll("\033\\[[;\\d]*m", "");
+            }
             writer.print(informacion);
             writer.flush();
         } catch (FileNotFoundException e) {
