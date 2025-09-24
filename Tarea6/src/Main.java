@@ -11,7 +11,11 @@ public class Main {
         String error = "\033[31m[ERROR] \033[37m ";
         String ok = "\033[32m[OK] \033[37m";
         ArrayList<String> proceso = new ArrayList<>(List.of("ping","4",sitio));
-        proceso.add(1,"-c");
+        if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
+            proceso.add(1,"-n");
+        } else if (System.getProperty("os.name").toLowerCase().startsWith("linux")) {
+            proceso.add(1,"-c");
+        }
         ProcessBuilder pb = new ProcessBuilder(proceso);
         // pb.redirectOutput(new File("print_output.log")); // Redireccion de output a fichero
         //pb.redirectError(new File("ping_error.log")); // Redireccion de errores a fichero
