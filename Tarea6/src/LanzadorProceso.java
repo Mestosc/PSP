@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class LanzadorProceso {
     /**
      * Lanzamos un ping a un sitio web
      * @param sitio el sitio web al que lanzamos el ping

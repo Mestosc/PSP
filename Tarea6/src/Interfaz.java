@@ -9,7 +9,7 @@ public class Interfaz {
             System.out.print("> ");
             sitio = sc.next();
             if (!sitio.equalsIgnoreCase("salir")) {
-                Main.lanzarPing(sitio);
+                LanzadorProceso.lanzarPing(sitio);
             }
         } while (!sitio.equalsIgnoreCase("salir"));
     }
