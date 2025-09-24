@@ -59,8 +59,6 @@ public class LanzadorProceso {
                     pr.set(0,"tracert"); /* En windows hay que poner tracert en lugar de traceroute */
                 }
                 return pr;
-            } case "dig" -> {
-                return new ArrayList<>(List.of("dig",sitio));
             }
             default -> {
                 return new ArrayList<>();
