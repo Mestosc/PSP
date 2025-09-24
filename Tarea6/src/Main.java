@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Main {
     public static void lanzarPing(String sitio) {
-        String error = "\033[31m[ERROR] \033[37m ";
+        String error = "\033[31m[ERROR] \033[37m";
         String ok = "\033[32m[OK] \033[37m";
         ArrayList<String> proceso = new ArrayList<>(List.of("ping","4",sitio));
         if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
