@@ -18,8 +18,8 @@ public class LanzadorProceso {
         ArrayList<String> proceso = obtenerComandoFinalHerramienta("ping",sitio);
         if (!proceso.isEmpty()) {
             ProcessBuilder pb = new ProcessBuilder(proceso);
-            //pb.redirectOutput(new File("print_output.log")); // Redireccion de output a fichero
-            //pb.redirectError(new File("ping_error.log")); // Redireccion de errores a fichero
+            //pb.redirectOutput(new File("print_output.log")); // Redireccion de output a fichero, lo dejo aqui para quede constancia de que lo he hecho y funciona sin fallo ninguno si quiero que aparezca el OK, tendria que hacerlo de otra manera con un metodo aparte
+            //pb.redirectError(new File("ping_error.log")); // Redireccion de errores a fichero, lo dejo aqui para quede constancia de que lo he hecho y funciona sin fallo ninguno si quiero que aparezca el OK, tendria que hacerlo de otra manera con un metodo aparte
             try {
                 Process p = pb.start();
                 mostrarInformacionRequerimientos(p.getErrorStream(), error);
