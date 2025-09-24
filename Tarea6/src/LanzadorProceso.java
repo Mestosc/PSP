@@ -1,8 +1,5 @@
-import java.io.BufferedReader;
+import java.io.*;
 //import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +19,8 @@ public class LanzadorProceso {
             //pb.redirectError(new File("ping_error.log")); // Redireccion de errores a fichero, lo dejo aqui para quede constancia de que lo he hecho y funciona sin fallo ninguno si quiero que aparezca el OK, tendria que hacerlo de otra manera con un metodo aparte
             try {
                 Process p = pb.start();
-                mostrarInformacionRequerimientos(p.getErrorStream(), error);
-                mostrarInformacionRequerimientos(p.getInputStream(), ok);
+                System.out.println(obtenerInformacionRequerimientos(p.getErrorStream(), error));
+                System.out.println(obtenerInformacionRequerimientos(p.getInputStream(), ok));
                 int estado = p.waitFor();
                 System.out.println("Operacion completada. Codigo de salida " + estado);
             } catch (IOException e) {
@@ -66,15 +63,31 @@ public class LanzadorProceso {
      * @param ok El string que hace referencia a si es un error o esta bien
      * @throws IOException Problema con la entrada salida
      */
-    private static void mostrarInformacionRequerimientos(InputStream p, String ok) throws IOException {
+    private static String obtenerInformacionRequerimientos(InputStream p, String ok) throws IOException {
         try (BufferedReader buf = new BufferedReader(new InputStreamReader(p, StandardCharsets.UTF_8))) {
             String linea;
+            StringBuilder stringBuilder = new StringBuilder();
             while ((linea = buf.readLine()) != null) {
                 String lineaF = "";
                 lineaF += ok;
-                lineaF += linea;
-                System.out.println(lineaF);
+                lineaF += linea + "\n";
+                stringBuilder.append(lineaF);
             }
+            return stringBuilder.toString();
+        }
+    }
+    /**
+     * Permite enviar la informacion a un archivo, permite hacerlo al mismo tiempo que se muestra la salida o no, y permite hacerlo con el
+     * formato que aparece al usar el tema del output, además soporta que el log sea acumulativo cosa que es más natural
+     * @param file El archivo del log
+     * @param informacion la informacion a escribir
+     */
+    private static void informacionRequerimientosArchivo(String file,String informacion) {
+        try (PrintWriter writer = new PrintWriter(new FileOutputStream(file,true))) {
+            writer.print(informacion);
+            writer.flush();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found "+ e);
         }
     }
 }
