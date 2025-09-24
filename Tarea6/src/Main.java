@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+    /**
+     * Lanzamos un ping a un sitio web
+     * @param sitio el sitio web al que lanzamos el ping
+     */
     public static void lanzarPing(String sitio) {
         String error = "\033[31m[ERROR] \033[37m";
         String ok = "\033[32m[OK] \033[37m";
@@ -27,12 +31,18 @@ public class Main {
             int estado = p.waitFor();
             System.out.println("Operacion completada. Codigo de salida " + estado);
         } catch (IOException e) {
-            System.out.println("Problema de entrada salida " + e);
+            System.out.println("Problema de entrada salida: " + e);
         } catch (InterruptedException e) {
             System.out.println("Interrupcion " + e);
         }
     }
 
+    /**
+     * Muestra la informacion segun los requerimientos
+     * @param p Flujo de datos para la salida de errores y la salida del proceso que vamos a estar ocupando
+     * @param ok El string que hace referencia a si es un error o esta bien
+     * @throws IOException Problema con la entrada salida
+     */
     private static void mostrarInformacionRequerimientos(InputStream p, String ok) throws IOException {
         try (BufferedReader buf = new BufferedReader(new InputStreamReader(p, StandardCharsets.UTF_8))) {
             String linea;
