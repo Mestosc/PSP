@@ -17,7 +17,8 @@ public class Main {
         String ok = "\033[32m[OK] \033[37m";
         ArrayList<String> proceso = new ArrayList<>(List.of("ping","4",sitio));
         if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
-            proceso.add(1,"/n");
+            proceso.add(1,"/n"); /* En windows hay que poner ping /n num, para el tema de numero de paquetes segun la documentacion de Microsoft
+            https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/ping*/
         } else if (System.getProperty("os.name").toLowerCase().startsWith("linux")) {
             proceso.add(1,"-c");
         }
