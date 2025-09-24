@@ -21,6 +21,7 @@ public class LanzadorProceso {
                 Process p = pb.start();
                 System.out.println(obtenerInformacionRequerimientos(p.getErrorStream(), error));
                 System.out.println(obtenerInformacionRequerimientos(p.getInputStream(), ok));
+                //informacionRequerimientosArchivo("printed_log.log",obtenerInformacionRequerimientos(p.getInputStream(), ok)); // Esto es para guardar el archivo log de una manera más comoda permitiendo que mantenga un formato uniforme con lo que hay en la salida sin que se vea extraño y que además permita que se guarde con lo anterior cosa que se parece más a un log.
                 int estado = p.waitFor();
                 System.out.println("Operacion completada. Codigo de salida " + estado);
             } catch (IOException e) {
@@ -84,6 +85,7 @@ public class LanzadorProceso {
      */
     private static void informacionRequerimientosArchivo(String file,String informacion) {
         try (PrintWriter writer = new PrintWriter(new FileOutputStream(file,true))) {
+            informacion = informacion.replaceAll("\033\\[[;\\d]*m", "");
             writer.print(informacion);
             writer.flush();
         } catch (FileNotFoundException e) {

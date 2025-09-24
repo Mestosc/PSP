@@ -1,0 +1,18 @@
+[OK] PING google.com (142.250.185.14) 56(84) bytes de datos.
+[OK] 64 bytes desde mad41s11-in-f14.1e100.net (142.250.185.14): icmp_seq=1 ttl=112 tiempo=17.0 ms
+[OK] 64 bytes desde mad41s11-in-f14.1e100.net (142.250.185.14): icmp_seq=2 ttl=112 tiempo=25.2 ms
+[OK] 64 bytes desde mad41s11-in-f14.1e100.net (142.250.185.14): icmp_seq=3 ttl=112 tiempo=29.7 ms
+[OK] 64 bytes desde mad41s11-in-f14.1e100.net (142.250.185.14): icmp_seq=4 ttl=112 tiempo=31.6 ms
+[OK] 
+[OK] --- google.com estadísticas ping ---
+[OK] 4 paquetes transmitidos, 4 recibidos, 0% packet loss, time 3004ms
+[OK] rtt min/avg/max/mdev = 16.962/25.865/31.610/5.637 ms
+[OK] PING 1.1.1.1 (1.1.1.1) 56(84) bytes de datos.
+[OK] 64 bytes desde 1.1.1.1: icmp_seq=1 ttl=52 tiempo=32.1 ms
+[OK] 64 bytes desde 1.1.1.1: icmp_seq=2 ttl=52 tiempo=41.5 ms
+[OK] 64 bytes desde 1.1.1.1: icmp_seq=3 ttl=52 tiempo=26.5 ms
+[OK] 64 bytes desde 1.1.1.1: icmp_seq=4 ttl=52 tiempo=30.5 ms
+[OK] 
+[OK] --- 1.1.1.1 estadísticas ping ---
+[OK] 4 paquetes transmitidos, 4 recibidos, 0% packet loss, time 3004ms
+[OK] rtt min/avg/max/mdev = 26.473/32.657/41.530/5.519 ms
