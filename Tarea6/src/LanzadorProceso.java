@@ -52,6 +52,14 @@ public class LanzadorProceso {
                     pr.add(1,"-c");
                 }
                 return pr;
+            } case "traceroute","tracert" -> {
+                ArrayList<String> pr = new ArrayList<>(List.of("traceroute",sitio));
+                if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
+                    pr.set(0,"tracert"); /* En windows hay que poner tracert en lugar de traceroute */
+                }
+                return pr;
+            } case "dig" -> {
+                return new ArrayList<>(List.of("dig",sitio));
             }
             default -> {
                 return new ArrayList<>();
