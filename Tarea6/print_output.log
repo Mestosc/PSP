@@ -1,0 +1,9 @@
+PING google.com (142.250.200.78) 56(84) bytes de datos.
+64 bytes desde mad07s24-in-f14.1e100.net (142.250.200.78): icmp_seq=1 ttl=114 tiempo=17.4 ms
+64 bytes desde mad07s24-in-f14.1e100.net (142.250.200.78): icmp_seq=2 ttl=114 tiempo=30.5 ms
+64 bytes desde mad07s24-in-f14.1e100.net (142.250.200.78): icmp_seq=3 ttl=114 tiempo=32.3 ms
+64 bytes desde mad07s24-in-f14.1e100.net (142.250.200.78): icmp_seq=4 ttl=114 tiempo=28.9 ms
+
+--- google.com estadísticas ping ---
+4 paquetes transmitidos, 4 recibidos, 0% packet loss, time 3005ms
+rtt min/avg/max/mdev = 17.443/27.277/32.264/5.800 ms
