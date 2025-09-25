@@ -34,7 +34,7 @@ public class LanzadorProceso {
 
     /**
      * Permite una seleccion más dinamica de la herramienta a utilizar, en este caso no verifico si la herramienta esta instalada, el usuario debera añadir manualmente la comprobacion.
-     * aqui se usa la herramienta elegida independientemente de si esta no, si no esta dara error
+     * Aquí se usa la herramienta elegida independientemente de si esta no, sino esta dara error
      * @param herramienta la herramienta que quieres usar
      * @param sitio el sitio web al que hacer ping
      * @return el arraylist que corresponde a cada herramienta
