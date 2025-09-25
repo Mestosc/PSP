@@ -45,7 +45,7 @@ public class LanzadorProceso {
             case "nslookup" -> {
                 return new ArrayList<>(List.of("nslookup",sitio));
             } case "ping" -> {
-                ArrayList<String> pr = new ArrayList<>(List.of("ping","4",sitio));
+                ArrayList<String> pr = new ArrayList<>(List.of("ping","5",sitio));
                 if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
                     pr.add(1,"/n"); /* En windows hay que poner ping /n num, para el tema de numero de paquetes segun la documentacion de Microsoft
             https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/ping*/
