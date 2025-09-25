@@ -12,5 +12,6 @@ public class Interfaz {
                 LanzadorProceso.lanzarPing("ping",sitio);
             }
         } while (!sitio.equalsIgnoreCase("salir"));
+	sc.close()
     }
 }
