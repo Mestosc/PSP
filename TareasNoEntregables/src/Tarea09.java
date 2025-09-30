@@ -17,6 +17,11 @@ public class Tarea09 extends Thread {
     public static void main(String[] args) {
         Tarea09 t1 = new Tarea09(100);
         t1.start();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+        }
         if (System.getProperty("os.name").startsWith("Windows")) {
             System.out.println("El sistema operativo es Windows");
         } else {
