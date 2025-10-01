@@ -12,16 +12,8 @@ public class EfectoDomino extends Thread {
     @Override
     public void run() {
         long inicio = System.currentTimeMillis();
-            for (int i = 0; i < 5; i++) {
-                System.out.println("Soy el hilo " + numeroHilo + " en mi iteracion " + i);
-                try {
-                    Thread.sleep((long) Math.floor(Math.random() * (600 -100 +1) +100));
-                }
-                catch (InterruptedException e) {
-                    System.out.println("Hilo interrumpido");
-                }
-            }
-            if (numeroHilo < totalHilos) {
+        iteracionEnHilo();
+        if (numeroHilo < totalHilos) {
                 EfectoDomino hilo = new EfectoDomino(numeroHilo+1,totalHilos);
                 hilo.start();
                 try {
@@ -34,4 +26,16 @@ public class EfectoDomino extends Thread {
             }
         }
 
+    private void iteracionEnHilo() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Soy el hilo " + numeroHilo + " en mi iteracion " + i);
+            try {
+                Thread.sleep((long) Math.floor(Math.random() * (600 -100 +1) +100));
+            }
+            catch (InterruptedException e) {
+                System.out.println("Hilo interrumpido");
+            }
+        }
     }
+
+}
