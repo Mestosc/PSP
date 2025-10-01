@@ -6,7 +6,8 @@ public class EfectoDomino extends Thread {
         this.totalHilos = totalHilos;
     }
     public EfectoDomino(int totalHilos) {
-        this.totalHilos = totalHilos;
+        if (totalHilos<1) this.totalHilos=5;
+        else this.totalHilos = totalHilos;
     }
     public EfectoDomino() {} // Para usar valores por defecto
     @Override
