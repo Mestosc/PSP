@@ -35,6 +35,3 @@ public class EfectoDomino extends Thread {
         }
 
     }
-//for (int i = 0;i<5;i++){
-//        System.out.println("Soy el hilo "+ this + "iteracion "+i);
-//        }
