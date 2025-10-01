@@ -15,35 +15,39 @@ public class EfectoDomino extends Thread {
         long inicio = System.currentTimeMillis();
         iteracionEnHilo();
         if (numeroHilo < totalHilos) {
-                EfectoDomino hilo = new EfectoDomino(numeroHilo+1,totalHilos);
-                hilo.start();
-                try {
-                    if (hilo.isAlive()) {
-                        try {
-                            Thread.sleep(500);
-                            System.out.println("Vigilando hilo " + hilo.getName() + "... sigue activo");
-                        } catch (InterruptedException e) {
-                            System.out.println("Hilo interrumpido");
-                        }
-                    }
-                    hilo.join();
-                } catch (InterruptedException e) {
-                    System.out.println("Hilo interrumpido");
-                }
-                long fin = System.currentTimeMillis();
+            EfectoDomino hilo = new EfectoDomino(numeroHilo+1,totalHilos);
+            hilo.start();
+            vigilanteDeHilo(hilo);
+            long fin = System.currentTimeMillis();
                 System.out.println("Acabó hilo " + hilo.getName() + " Tiempo: " + (fin-inicio) + " ms");
             }
         }
 
+    private static void vigilanteDeHilo(Thread hilo) {
+        try {
+            if (hilo.isAlive()) {
+                esperar(500);
+                System.out.println("Vigilando hilo " + hilo.getName() + "... sigue activo");
+            }
+            hilo.join();
+        } catch (InterruptedException e) {
+            System.out.println("Hilo interrumpido");
+        }
+    }
+
     private void iteracionEnHilo() {
         for (int i = 0; i < 5; i++) {
             System.out.println("Soy el hilo " + numeroHilo + " en mi iteracion " + i);
-            try {
-                Thread.sleep((long) Math.floor(Math.random() * (600 -100 +1) +100));
-            }
-            catch (InterruptedException e) {
-                System.out.println("Hilo interrumpido");
-            }
+            esperar((long) Math.floor(Math.random() * (600 -100 +1) +100));
+        }
+    }
+
+    private static void esperar(long miliSeconds) {
+        try {
+            Thread.sleep(miliSeconds);
+        }
+        catch (InterruptedException e) {
+            System.out.println("Hilo interrumpido");
         }
     }
 
