@@ -17,6 +17,14 @@ public class EfectoDomino extends Thread {
                 EfectoDomino hilo = new EfectoDomino(numeroHilo+1,totalHilos);
                 hilo.start();
                 try {
+                    if (hilo.isAlive()) {
+                        try {
+                            Thread.sleep(500);
+                            System.out.println("Vigilando hilo " + hilo.getName() + "... sigue activo");
+                        } catch (InterruptedException e) {
+                            System.out.println("Hilo interrumpido");
+                        }
+                    }
                     hilo.join();
                 } catch (InterruptedException e) {
                     System.out.println("Hilo interrumpido");
