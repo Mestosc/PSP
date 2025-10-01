@@ -16,9 +16,15 @@ public class Tarea09 extends Thread {
     }
     public static void main(String[] args) {
         Tarea09 t1 = new Tarea09(100);
+        Tarea09 t2 = new Tarea09(200);
         t1.start();
         try {
             Thread.sleep(2000);
+            t2.start();
+            if (t2.isAlive()) {
+                t2.join();
+                System.out.println("El hilo ha terminado");
+            }
         } catch (InterruptedException e) {
                 throw new RuntimeException(e);
         }

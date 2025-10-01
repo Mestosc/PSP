@@ -1,5 +1,5 @@
 public class EfectoDomino extends Thread {
-    int numeroHilo = 1;
+    int numeroHilo = 0;
     int totalHilos = 5;
     public EfectoDomino(int numeroHilo,int totalHilos) {
         this.numeroHilo = numeroHilo;
