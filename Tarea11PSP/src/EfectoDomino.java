@@ -8,7 +8,7 @@ public class EfectoDomino extends Thread {
     public EfectoDomino(int totalHilos) {
         this.totalHilos = totalHilos;
     }
-    public EfectoDomino() {}
+    public EfectoDomino() {} // Para usar valores por defecto
     @Override
     public void run() {
         long inicio = System.currentTimeMillis();
