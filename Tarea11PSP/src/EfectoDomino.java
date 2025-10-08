@@ -24,7 +24,7 @@ public class EfectoDomino extends Thread {
     }
 
 
-    private static void vigilanteDeHilo(Thread hilo) {
+    public static void vigilanteDeHilo(Thread hilo) {
         try {
             if (hilo.isAlive()) {
                 esperar(500);
