@@ -13,15 +13,16 @@ public class EfectoDomino extends Thread {
     @Override
     public void run() {
         long inicio = System.currentTimeMillis();
-        iteracionEnHilo();
         if (numeroHilo < totalHilos) {
-            EfectoDomino hilo = new EfectoDomino(numeroHilo+1,totalHilos);
+            EfectoDomino hilo = new EfectoDomino(numeroHilo + 1, totalHilos);
             hilo.start();
             vigilanteDeHilo(hilo);
             long fin = System.currentTimeMillis();
-                System.out.println("Acabó hilo " + hilo.getName() + " Tiempo: " + (fin-inicio) + " ms");
-            }
+            System.out.println("Acabó hilo " + hilo.getName() + " Tiempo: " + (fin - inicio) + " ms");
         }
+        iteracionEnHilo();
+    }
+
 
     private static void vigilanteDeHilo(Thread hilo) {
         try {
