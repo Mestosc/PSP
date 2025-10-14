@@ -9,10 +9,7 @@ public class Tarea15 extends Thread {
     }
 
     public static void main(String[] args) {
-        Tarea15 hilo1 = new Tarea15();
-        Tarea15 hilo2 = new Tarea15();
-        Tarea15 hilo3 = new Tarea15();
-        Tarea15[] hilos = {hilo1, hilo2, hilo3};
+        Tarea15[] hilos = {new Tarea15(), new Tarea15(), new Tarea15()};
         for (int i = hilos.length-1;i>=0;i--) {
             Tarea15 hilo = hilos[i];
             hilo.start();

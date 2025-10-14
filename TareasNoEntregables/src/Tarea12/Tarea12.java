@@ -1,5 +1,7 @@
 package Tarea12;
 
+import java.util.concurrent.TimeUnit;
+
 public class Tarea12 {
     public static void main(String[] args) {
         SumarPares pares = new SumarPares();

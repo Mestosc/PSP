@@ -16,7 +16,7 @@ public class Caja extends Thread {
                 } catch (InterruptedException e) {
                     System.out.println("Error: " + e.getMessage());
                 }
-                capital += 10;
+                incrementarDecrementar(true);
             }
         } else if (tipo.equalsIgnoreCase("extracciones")) {
             for (int i = 0;i<3000;i++) {
@@ -26,8 +26,13 @@ public class Caja extends Thread {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                capital -= 10;
+                incrementarDecrementar(false);
             }
         }
     }
-}
+    private synchronized void incrementarDecrementar(boolean incrementar) {
+        if (incrementar) {
+            capital += 10;
+        } else { capital -= 10; }
+    }
+ }

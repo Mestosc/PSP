@@ -1,9 +1,12 @@
 public class Tarea16 extends Thread {
     public static int contador = 0;
+    private final Object locker = new Object();
     @Override
     public void run() {
         for (int i = 0;i<50;i++) {
-            contador++;
+            synchronized (locker) {
+                contador++;
+            }
             try {
                 Thread.sleep((long) Math.floor(Math.random() * (600 - 100) + 100));
             } catch (InterruptedException e) {
