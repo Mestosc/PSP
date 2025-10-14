@@ -10,6 +10,12 @@ public class ContarVocales extends Thread {
         this(vocalContar);
         this.textoContar = textoContar;
     }
+
+    /**
+     * Desacentuar, se encarga de devolver las letras sin acento, en caso de que alguna la tenga solo valido para los acentos del idioma español
+     * @param letra la letra a quitar el acento
+     * @return la letra desacentuada
+     */
     private static char desacentuar(char letra) {
         return switch (letra) {
             case 'á' -> 'a';
@@ -31,5 +37,4 @@ public class ContarVocales extends Thread {
             }
         }
     }
-
 }
