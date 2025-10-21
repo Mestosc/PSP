@@ -2,9 +2,9 @@ public class ContarVocales extends Thread {
     static int vocalesTotales;
     char vocalContar;
     String textoContar;
-    private final Object lock = new Object();
+    private static final Object lock = new Object();
     public ContarVocales(char vocalContar) {
-        this.vocalContar = Character.toLowerCase(vocalContar);
+        this.vocalContar = desacentuar(Character.toLowerCase(vocalContar));
     }
     public ContarVocales(String textoContar, char vocalContar) {
         this(vocalContar);
