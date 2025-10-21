@@ -1,9 +1,6 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -28,7 +25,7 @@ public class Main {
                 }
             }
         }
-        sc.close();
+        sc.close(); // Cerrando el maldito Scanner cosa que ya da lo suyo
     }
     private static void contarTextoVocales(String texto) {
         ContarVocales[] contarVocales = {new ContarVocales(texto,'A'), new ContarVocales(texto,'E')
