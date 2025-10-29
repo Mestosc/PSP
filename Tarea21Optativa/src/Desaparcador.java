@@ -1,12 +1,15 @@
 public class Desaparcador extends Thread {
-    Parking aparcadero;
-    public Desaparcador(Parking aparcadero) {
-        this.aparcadero = aparcadero;
+    private Parking parking;
+    private Coche[] coches;
+    public Desaparcador(Parking parking,Coche[] coches) {
+        this.parking = parking;
+        this.coches = coches;
     }
+
     @Override
     public void run() {
-        while (true) {
-            aparcadero.salir((int) Math.floor(Math.random() * aparcadero.parking.length));
+        for (int i = 0;i<coches.length;i++) {
+            parking.desaparcar();
         }
     }
 }

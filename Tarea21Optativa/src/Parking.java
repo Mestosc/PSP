@@ -1,29 +1,23 @@
-import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Semaphore;
 
 public class Parking {
-    Coche[] parking = new Coche[4];
-    public synchronized void aparcar(Coche cocheAparcar,int plaza) {
-        while (parking[plaza]!=null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                System.out.println("Errro");
-            }
+    BlockingQueue<Coche> parking = new ArrayBlockingQueue<>(4);
+    public void aparcar(Coche coche) {
+        try {
+            System.out.println("El coche " + coche + " ha aparcado");
+            parking.put(coche);
+        } catch (InterruptedException e) {
+            System.out.println("Problemas");
         }
-        System.out.println("Aparacando " + cocheAparcar.modelo);
-        parking[plaza] = cocheAparcar;
-        notifyAll();
     }
-    public synchronized void salir(int plaza) {
-        while (parking[plaza]==null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                System.out.println("Errro");
-            }
+    public void desaparcar() {
+        try {
+            Coche p = parking.take();
+            System.out.println("El coche " + p + " ha salido");
+        } catch (InterruptedException e) {
+            System.out.println("Problemas");
         }
-        System.out.println("Saliendo " + parking[plaza].modelo);
-        parking[plaza] = null;
-        notifyAll();
     }
 }

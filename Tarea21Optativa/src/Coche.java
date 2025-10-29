@@ -6,4 +6,12 @@ public class Coche {
         this.modelo = modelo;
         this.marca = marca;
     }
+
+    @Override
+    public String toString() {
+        return "Coche{" +
+                "modelo='" + modelo + '\'' +
+                ", marca='" + marca + '\'' +
+                '}';
+    }
 }

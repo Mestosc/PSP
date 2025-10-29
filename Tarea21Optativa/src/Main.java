@@ -2,9 +2,8 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Parking parking1 = new Parking();
         Coche[] coches = new Coche[10];
-
+        Parking parking = new Parking();
         coches[0] = new Coche("Model S", "Tesla", null, 0);
         coches[1] = new Coche("Civic", "Honda", null, 1);
         coches[2] = new Coche("Corolla", "Toyota", null, 2);
@@ -15,10 +14,21 @@ public class Main {
         coches[7] = new Coche("Panda", "Fiat", null, 7);
         coches[8] = new Coche("CX-5", "Mazda", null, 8);
         coches[9] = new Coche("Golf", "Volkswagen", null, 9);
-        Aparcador aparcador = new Aparcador(parking1,coches);
-        Desaparcador desaparcador = new Desaparcador(parking1);
-        aparcador.start();
-        desaparcador.start();
+
+        Aparcador[] aparcadors = {new Aparcador(parking,coches),
+                new Aparcador(parking,coches),
+                new Aparcador(parking,coches),
+                new Aparcador(parking,coches)};
+
+        Desaparcador[] desaparcador = {new Desaparcador(parking,coches),new Desaparcador(parking,coches),new Desaparcador(parking,coches)};
+
+        for (Aparcador aparcador : aparcadors) {
+            aparcador.start();
+        }
+        for (Desaparcador desaparcador1 : desaparcador) {
+            desaparcador1.start();
+        }
+
 
     }
 }
