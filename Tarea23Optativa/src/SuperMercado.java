@@ -12,7 +12,7 @@ public class SuperMercado {
 
     public void compraYPago() {
         try {
-            cajas.acquire();
+            cajas.acquire(((int) Math.floor(Math.random()*(cajas.availablePermits()-1)+1)));
             Thread.sleep(100);
             //importeClientes += 100;
             int importe = (int) Math.floor(Math.random()*(10 -2) * 12);
