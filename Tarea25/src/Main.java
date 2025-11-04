@@ -41,7 +41,7 @@ public class Main {
      * @param ip la ip del servidor a comprobar
      * @param puerto el puerto a comprobar
      */
-    private static void comprobarPuerto(String ip, int puerto) {
+    public static void comprobarPuerto(String ip, int puerto) {
         try (Socket socket = new Socket(ip, puerto)) {
             if (socket.isConnected()) {
                 System.out.println("Conexion exitosa. El puerto " + puerto + " disponible");
