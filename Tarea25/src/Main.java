@@ -27,26 +27,35 @@ public class Main {
             }
             if (puerto==0) {
                 for (int puertoPopular : puertosPopulares) {
-                    try (Socket socket = new Socket(ip,puertoPopular)) {
-                        if (socket.isConnected()) {
-                            System.out.println("Conexion exitosa. El puerto " + socket.getPort() + " esta disponible");
-                        }
-                    } catch (IOException e) {
-                        System.out.println("Fallo de conexion, puerto " + puertoPopular + " no disponible");
-                    }
+                    comprobarPuerto(ip,puertoPopular);
                 }
             } else {
-                try (Socket socket = new Socket(ip,puerto)) {
-                    if (socket.isConnected()) {
-                        System.out.println("Conexion exitosa. El puerto " + puerto + " disponible");
-                    }
-                } catch (IOException e) {
-                    System.out.println("Problemas de conexion, puerto "+ puerto + " no disponible");
-                }
+                comprobarPuerto(ip, puerto);
             }
         }
 
+    }
+
+    /**
+     * Comprueba si un puerto en un determinado servidor esta disponible para conectarse
+     * @param ip la ip del servidor a comprobar
+     * @param puerto el puerto a comprobar
+     */
+    private static void comprobarPuerto(String ip, int puerto) {
+        try (Socket socket = new Socket(ip, puerto)) {
+            if (socket.isConnected()) {
+                System.out.println("Conexion exitosa. El puerto " + puerto + " disponible");
+            }
+        } catch (IOException e) {
+            System.out.println("Problemas de conexion, puerto "+ puerto + " no disponible");
         }
+    }
+
+    /**
+     * Verifica si la direccion IP es valida
+     * @param ip la direccion IP a comprobar
+     * @return si es valida o no
+     */
     public static boolean esIPValida(String ip) {
         try {
             InetAddress inet = InetAddress.getByName(ip);
