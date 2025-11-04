@@ -10,11 +10,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] puertosPopulares = {21, 22, 80, 443};
+        int[] puertosPopulares = {21, 22, 80, 443}; // Un array con los metodos más populares
         String ip;
         int puerto;
         while (true) {
-            System.out.print("Introduzca una IP: ");
+            System.out.print("Introduzca una IP: "); // Informamos sobre la información que queremos recojer
             ip = sc.next();
             if (ip.equalsIgnoreCase("salir")) {
                 break;
@@ -27,7 +27,7 @@ public class Main {
             }
             if (puerto==0) {
                 for (int puertoPopular : puertosPopulares) {
-                    comprobarPuerto(ip,puertoPopular);
+                    comprobarPuerto(ip,puertoPopular); // Verificamos cada puerto popular
                 }
             } else {
                 comprobarPuerto(ip, puerto);
