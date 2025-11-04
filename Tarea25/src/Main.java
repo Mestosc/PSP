@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] puertosPopulares = {21, 22, 80, 443}; // Un array con los metodos más populares
+        int[] puertosPopulares = {21, 22, 80, 443}; // Un array con los métodos más populares
         String ip;
         int puerto;
         while (true) {
@@ -37,17 +37,17 @@ public class Main {
     }
 
     /**
-     * Comprueba si un puerto en un determinado servidor esta disponible para conectarse
+     * Comprueba si un puerto en un determinado servidor está disponible para conectarse
      * @param ip la ip del servidor a comprobar
      * @param puerto el puerto a comprobar
      */
     public static void comprobarPuerto(String ip, int puerto) {
         try (Socket socket = new Socket(ip, puerto)) {
             if (socket.isConnected()) {
-                System.out.println("Conexion exitosa. El puerto " + puerto + " disponible");
+                System.out.println("Conexión exitosa. El puerto " + puerto + " disponible");
             }
         } catch (IOException e) {
-            System.out.println("Problemas de conexion, puerto "+ puerto + " no disponible");
+            System.out.println("Problemas de conexión, puerto "+ puerto + " no disponible");
         }
     }
 
