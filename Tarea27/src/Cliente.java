@@ -16,6 +16,7 @@ public class Cliente {
             PrintWriter writer = new PrintWriter(socket.getOutputStream(),true);
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             while (true) {
+                System.out.print("Introduzca texto: ");
                 linea = scanner.nextLine();
                 if (linea.equalsIgnoreCase("adios")) {
                     break;
