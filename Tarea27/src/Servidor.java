@@ -13,7 +13,9 @@ public class Servidor {
         InetSocketAddress dir = new InetSocketAddress("localhost",8000);
         try (ServerSocket server = new ServerSocket()) {
             server.bind(dir);
+            System.out.println("Esperando conexion");
             Socket socket = server.accept();
+            System.out.println("Conexion realizada");
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter writer = new PrintWriter(socket.getOutputStream(),true);
             while (true) {
