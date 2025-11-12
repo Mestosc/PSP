@@ -18,10 +18,10 @@ public class Cliente {
             while (true) {
                 System.out.print("Introduzca texto: ");
                 linea = scanner.nextLine();
+                writer.println(linea);
                 if (linea.equalsIgnoreCase("adios")) {
                     break;
                 }
-                writer.println(linea);
                 linea = reader.readLine();
                 System.out.println(linea);
             }
