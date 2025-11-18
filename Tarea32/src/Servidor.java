@@ -19,12 +19,12 @@ public class Servidor {
             ObjectInputStream ois = new ObjectInputStream(bais);
             Object ob = ois.readObject();
             ois.close();
-            if (ob instanceof ArrayList<?> palabras) {
-                String palabraMasLarga = (String) palabras.getFirst();
-                for (Object object : palabras) {
-                    if (object instanceof String palabra) {
-                        if (palabra.length()>palabraMasLarga.length()) {
-                            palabraMasLarga = palabra;
+            if (ob instanceof ArrayList<?> palabras) { // Comprobamos que estamos tratando con un ArrayList
+                String palabraMasLarga = (String) palabras.getFirst(); // Obtenemos la primera palabra y la convertimos a String
+                for (Object object : palabras) { // Recorremos el Array que al no saber el tipo es de Object
+                    if (object instanceof String palabra) { // Si el elemento es un String
+                        if (palabra.length()>palabraMasLarga.length()) { // Comprobamos si la palabra es más larga que la palabra más larga en cuyo caso
+                            palabraMasLarga = palabra; // Asignamos palabraMasLarga a palabra
                         }
                     }
                 }
