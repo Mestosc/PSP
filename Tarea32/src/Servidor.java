@@ -20,14 +20,7 @@ public class Servidor {
             Object ob = ois.readObject();
             ois.close();
             if (ob instanceof ArrayList<?> palabras) { // Comprobamos que estamos tratando con un ArrayList
-                String palabraMasLarga = (String) palabras.getFirst(); // Obtenemos la primera palabra y la convertimos a String
-                for (Object object : palabras) { // Recorremos el Array que al no saber el tipo es de Object
-                    if (object instanceof String palabra) { // Si el elemento es un String
-                        if (palabra.length()>palabraMasLarga.length()) { // Comprobamos si la palabra es más larga que la palabra más larga en cuyo caso
-                            palabraMasLarga = palabra; // Asignamos palabraMasLarga a palabra
-                        }
-                    }
-                }
+                String palabraMasLarga = getPalabraMasLarga(palabras);
                 buffer = palabraMasLarga.getBytes();
                 DatagramPacket datagramPacket = new DatagramPacket(buffer,buffer.length,address,puerto);
                 datagramSocket.send(datagramPacket);
@@ -39,5 +32,17 @@ public class Servidor {
         } catch (ClassNotFoundException e) {
             System.out.println("Lista enviada");
         }
+    }
+
+    private static String getPalabraMasLarga(ArrayList<?> palabras) {
+        String palabraMasLarga = (String) palabras.getFirst(); // Obtenemos la primera palabra y la convertimos a String
+        for (Object object : palabras) { // Recorremos el Array que al no saber el tipo es de Object
+            if (object instanceof String palabra) { // Si el elemento es un String
+                if (palabra.length()>palabraMasLarga.length()) { // Comprobamos si la palabra es más larga que la palabra más larga en cuyo caso
+                    palabraMasLarga = palabra; // Asignamos palabraMasLarga a palabra
+                }
+            }
+        }
+        return palabraMasLarga;
     }
 }
