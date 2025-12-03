@@ -31,15 +31,15 @@ public class Main {
         MetricasRespuesta respuestaMasRapida = (respuesta1.tiempoRespuesta()> respuesta2.tiempoRespuesta()) ? respuesta1 : respuesta2;
         MetricasRespuesta respuestaMasContenido = (respuesta1.tamanoPeticionBytes()> respuesta2.tamanoPeticionBytes()) ? respuesta1 : respuesta2;
         System.out.printf("La web más rapida ha sido %s con %,d ms%n", respuestaMasRapida.url(),respuestaMasRapida.tiempoRespuesta());
-        System.out.printf("La web con más contenido ha sido %s con %d%n", respuestaMasContenido.url(),respuestaMasContenido.tamanoPeticionBytes());
+        System.out.printf("La web con más contenido ha sido %s con %d caracteres%n", respuestaMasContenido.url(),respuestaMasContenido.tamanoPeticionBytes());
         sc.close();
     }
     public static MetricasRespuesta procesarPeticion(HttpClient client, HttpRequest request) {
         long startTime = System.currentTimeMillis();
         try {
-            HttpResponse<byte[]> response = client.send(request,HttpResponse.BodyHandlers.ofByteArray());
+            HttpResponse<String> response = client.send(request,HttpResponse.BodyHandlers.ofString());
             long endTime = System.currentTimeMillis();
-            int tamanoBytes = response.body().length;
+            int tamanoBytes = response.body().length();
             return new MetricasRespuesta(endTime-startTime,tamanoBytes,response.uri());
         } catch (Exception e) {
             System.out.println("Problemas con las solicitudes");
