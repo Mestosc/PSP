@@ -2,8 +2,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -29,9 +27,9 @@ public class Main {
             return;
         }
         MetricasRespuesta respuestaMasRapida = (respuesta1.tiempoRespuesta()> respuesta2.tiempoRespuesta()) ? respuesta1 : respuesta2;
-        MetricasRespuesta respuestaMasContenido = (respuesta1.tamanoPeticionBytes()> respuesta2.tamanoPeticionBytes()) ? respuesta1 : respuesta2;
+        MetricasRespuesta respuestaMasContenido = (respuesta1.tamanoRespuesta()> respuesta2.tamanoRespuesta()) ? respuesta1 : respuesta2;
         System.out.printf("La web más rapida ha sido %s con %,d ms%n", respuestaMasRapida.url(),respuestaMasRapida.tiempoRespuesta());
-        System.out.printf("La web con más contenido ha sido %s con %d caracteres%n", respuestaMasContenido.url(),respuestaMasContenido.tamanoPeticionBytes());
+        System.out.printf("La web con más contenido ha sido %s con %d caracteres%n", respuestaMasContenido.url(),respuestaMasContenido.tamanoRespuesta());
         sc.close();
     }
     public static MetricasRespuesta procesarPeticion(HttpClient client, HttpRequest request) {
