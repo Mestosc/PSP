@@ -26,7 +26,7 @@ public class Main {
             System.out.println("Alguna de las peticiones fallo");
             return;
         }
-        MetricasRespuesta respuestaMasRapida = (respuesta1.tiempoRespuesta()> respuesta2.tiempoRespuesta()) ? respuesta1 : respuesta2;
+        MetricasRespuesta respuestaMasRapida = (respuesta1.tiempoRespuesta()<respuesta2.tiempoRespuesta()) ? respuesta1 : respuesta2;
         MetricasRespuesta respuestaMasContenido = (respuesta1.tamanoRespuesta()> respuesta2.tamanoRespuesta()) ? respuesta1 : respuesta2;
         System.out.printf("La web más rapida ha sido %s con %,d ms%n", respuestaMasRapida.url(),respuestaMasRapida.tiempoRespuesta());
         System.out.printf("La web con más contenido ha sido %s con %d caracteres%n", respuestaMasContenido.url(),respuestaMasContenido.tamanoRespuesta());
