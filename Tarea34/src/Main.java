@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        System.out.print("Introduzca la primera URL: ");
         String url1 = sc.next();
+        System.out.print("Introduzca la segunda URL: ");
         String url2 = sc.next();
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request1 = HttpRequest.newBuilder()
