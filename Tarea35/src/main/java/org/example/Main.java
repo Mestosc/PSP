@@ -14,7 +14,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Moneda> monedas = generarListaMonedasDisponibles().orElseThrow(() -> new RuntimeException("No existen IDs"));
+        ArrayList<Moneda> monedas = generarListaMonedasDisponibles().orElseGet(ArrayList::new);
         System.out.print("Introduzca el simbolo o nombre de la moneda: ");
         String moneda = scanner.next();
 
