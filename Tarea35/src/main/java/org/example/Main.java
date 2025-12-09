@@ -17,12 +17,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         generarDiccionarioMonedaID();
-        Gson gson = new Gson();
         System.out.print("Introduzca el simbolo o nombre de la moneda: ");
         String moneda = scanner.next();
 
         try (HttpClient client = HttpClient.newHttpClient()) {
-            CriptoMoneda[] criptoMoneda = getCriptoMonedas(moneda, client, gson);
+            CriptoMoneda[] criptoMoneda = getCriptoMonedas(moneda, client);
             if (criptoMoneda == null || criptoMoneda.length == 0) {
                 System.out.println("No hay criptos");
                 return;
@@ -36,7 +35,7 @@ public class Main {
                 System.out.println("Nombre: " + nombre);
                 System.out.println("Simbolo: " + simbolo);
                 System.out.println("Precio Dolares: " + precioDolares+"$");
-                System.out.println("Ranking:" + ranking);
+                System.out.println("Ranking: " + ranking);
                 if (variacion24h.startsWith("-")) {
                     variacion24h = "\033[31m" + variacion24h + "\033[0m";
                 } else {
@@ -54,7 +53,8 @@ public class Main {
         }
     }
 
-    private static CriptoMoneda[] getCriptoMonedas(String moneda, HttpClient client, Gson gson) throws IOException, InterruptedException {
+    private static CriptoMoneda[] getCriptoMonedas(String moneda, HttpClient client) throws IOException, InterruptedException {
+        Gson gson = new Gson();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(crearURL(moneda)))
                 .header("Content-Type","application/json")
