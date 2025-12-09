@@ -64,27 +64,24 @@ public class Main {
     }
 
     public static String crearURL(String moneda,ArrayList<Moneda> monedaMap) {
-        String id = obtenerID(moneda,monedaMap);
-        if (id==null) {
-            throw new RuntimeException("Error no existe un ID");
-        }
+        String id = obtenerID(moneda,monedaMap).orElseThrow(() -> new RuntimeException("No se pudo obtener el ID"));
         return "https://api.coinlore.net/api/ticker/?id="+id;
     }
-    public static String obtenerID(String moneda,ArrayList<Moneda> monedaMap) {
+    public static Optional<String> obtenerID(String moneda,ArrayList<Moneda> monedaMap) {
         for (Moneda ticker : monedaMap) {
             if (ticker.simbolo().equalsIgnoreCase(moneda)) {
-                return ticker.id();
+                return Optional.of(ticker.id());
             }
         }
 
         // 2. Buscar por NOMBRE (Bitcoin, Ethereum)
         for (Moneda ticker : monedaMap) {
             if (ticker.nombre().equalsIgnoreCase(moneda)) {
-                return ticker.id();
+                return Optional.of(ticker.id());
             }
         }
 
-        return null; // No encontrado
+        return Optional.empty(); // No encontrado
     }
     public static Optional<ArrayList<Moneda>> generarListaMonedasDisponibles() {
         Gson gson = new Gson();
@@ -94,9 +91,9 @@ public class Main {
                     .uri(URI.create("https://api.coinlore.net/api/tickers/?start=0&limit=100"))
                     .build();
             String json = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-            Monedas tickers = gson.fromJson(json,Monedas.class);
+            CriptoMoneda[] tickers = gson.fromJson(json,CriptoMoneda[].class);
             ArrayList<Moneda> monedas = new ArrayList<>();
-            for (CriptoMoneda moneda : tickers.monedas) {
+            for (CriptoMoneda moneda : tickers) {
                 monedas.add(new Moneda(moneda.getId(),moneda.getSymbol(),moneda.getName()));
             }
             return Optional.of(monedas);
