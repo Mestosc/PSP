@@ -1,7 +1,6 @@
 package org.example;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.net.URI;
@@ -13,15 +12,14 @@ import java.util.*;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    private static final List<Moneda> monedaMap = new ArrayList<>();
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        generarDiccionarioMonedaID();
+        ArrayList<Moneda> monedas = generarListaMonedasDisponibles().orElseThrow(() -> new RuntimeException("No existen IDs"));
         System.out.print("Introduzca el simbolo o nombre de la moneda: ");
         String moneda = scanner.next();
 
         try (HttpClient client = HttpClient.newHttpClient()) {
-            CriptoMoneda[] criptoMoneda = getCriptoMonedas(moneda, client);
+            CriptoMoneda[] criptoMoneda = getCriptoMonedas(moneda, client,monedas);
             if (criptoMoneda == null || criptoMoneda.length == 0) {
                 System.out.println("No hay criptos");
                 return;
@@ -53,10 +51,10 @@ public class Main {
         }
     }
 
-    private static CriptoMoneda[] getCriptoMonedas(String moneda, HttpClient client) throws IOException, InterruptedException {
+    private static CriptoMoneda[] getCriptoMonedas(String moneda, HttpClient client,ArrayList<Moneda> monedaMap) throws IOException, InterruptedException {
         Gson gson = new Gson();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(crearURL(moneda)))
+                .uri(URI.create(crearURL(moneda,monedaMap)))
                 .header("Content-Type","application/json")
                 .GET()
                 .build();
@@ -65,14 +63,14 @@ public class Main {
         return gson.fromJson(json,CriptoMoneda[].class);
     }
 
-    public static String crearURL(String moneda) {
-        String id = obtenerID(moneda);
+    public static String crearURL(String moneda,ArrayList<Moneda> monedaMap) {
+        String id = obtenerID(moneda,monedaMap);
         if (id==null) {
             throw new RuntimeException("Error no existe un ID");
         }
         return "https://api.coinlore.net/api/ticker/?id="+id;
     }
-    public static String obtenerID(String moneda) {
+    public static String obtenerID(String moneda,ArrayList<Moneda> monedaMap) {
         for (Moneda ticker : monedaMap) {
             if (ticker.simbolo().equalsIgnoreCase(moneda)) {
                 return ticker.id();
@@ -88,7 +86,7 @@ public class Main {
 
         return null; // No encontrado
     }
-    public static void generarDiccionarioMonedaID() {
+    public static Optional<ArrayList<Moneda>> generarListaMonedasDisponibles() {
         Gson gson = new Gson();
         try (HttpClient client = HttpClient.newHttpClient()) {
 
@@ -97,11 +95,14 @@ public class Main {
                 .build();
         String json = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
         Monedas tickers = gson.fromJson(json,Monedas.class);
+        ArrayList<Moneda> monedas = new ArrayList<>();
         for (CriptoMoneda moneda : tickers.monedas) {
-            monedaMap.add(new Moneda(moneda.getId(),moneda.getSymbol(),moneda.getName()));
+            monedas.add(new Moneda(moneda.getId(),moneda.getSymbol(),moneda.getName()));
         }
+        return Optional.of(monedas);
         } catch (Exception e) {
             System.out.println("Problemas " + e);
         }
+        return Optional.empty();
     }
 }
