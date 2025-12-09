@@ -76,14 +76,12 @@ public class Main {
                 return Optional.of(ticker.id());
             }
         }
-
         // 2. Buscar por NOMBRE (Bitcoin, Ethereum)
         for (Moneda ticker : monedaMap) {
             if (ticker.nombre().equalsIgnoreCase(moneda)) {
                 return Optional.of(ticker.id());
             }
         }
-
         return Optional.empty(); // No encontrado
     }
     public static Optional<ArrayList<Moneda>> generarListaMonedasDisponibles() {
