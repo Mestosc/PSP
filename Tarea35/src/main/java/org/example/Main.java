@@ -22,14 +22,7 @@ public class Main {
         String moneda = scanner.next();
 
         try (HttpClient client = HttpClient.newHttpClient()) {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(crearURL(moneda)))
-                    .header("Content-Type","application/json")
-                    .GET()
-                    .build();
-            HttpResponse<String> respuesta = client.send(request,HttpResponse.BodyHandlers.ofString());
-            String json = respuesta.body();
-            CriptoMoneda[] criptoMoneda = gson.fromJson(json,CriptoMoneda[].class);
+            CriptoMoneda[] criptoMoneda = getCriptoMonedas(moneda, client, gson);
             if (criptoMoneda == null || criptoMoneda.length == 0) {
                 System.out.println("No hay criptos");
                 return;
@@ -60,6 +53,18 @@ public class Main {
             System.out.println("Otros problemas " + e);
         }
     }
+
+    private static CriptoMoneda[] getCriptoMonedas(String moneda, HttpClient client, Gson gson) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(crearURL(moneda)))
+                .header("Content-Type","application/json")
+                .GET()
+                .build();
+        HttpResponse<String> respuesta = client.send(request,HttpResponse.BodyHandlers.ofString());
+        String json = respuesta.body();
+        return gson.fromJson(json,CriptoMoneda[].class);
+    }
+
     public static String crearURL(String moneda) {
         String id = obtenerID(moneda);
         if (id==null) {
