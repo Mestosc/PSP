@@ -89,7 +89,6 @@ public class Main {
     public static Optional<ArrayList<Moneda>> generarListaMonedasDisponibles() {
         Gson gson = new Gson();
         try (HttpClient client = HttpClient.newHttpClient()) {
-
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.coinlore.net/api/tickers/?start=0&limit=100"))
                     .build();
