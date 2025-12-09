@@ -20,34 +20,37 @@ public class Main {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             CriptoMoneda[] criptoMoneda = getCriptoMonedas(moneda, client,monedas);
-            if (criptoMoneda == null || criptoMoneda.length == 0) {
-                System.out.println("No hay criptos");
-                return;
-            }
-            for (CriptoMoneda moneda1 : criptoMoneda) {
-                String nombre = moneda1.getName();
-                String simbolo = moneda1.getSymbol();
-                String precioDolares = moneda1.getPriceUsd();
-                int ranking = moneda1.getRank();
-                String variacion24h = moneda1.getPercentChange24h();
-                System.out.println("Nombre: " + nombre);
-                System.out.println("Simbolo: " + simbolo);
-                System.out.println("Precio Dolares: " + precioDolares+"$");
-                System.out.println("Ranking: " + ranking);
-                if (variacion24h.startsWith("-")) {
-                    variacion24h = "\033[31m" + variacion24h + "\033[0m";
-                } else {
-                    variacion24h = "\033[32m" + variacion24h + "\033[0m";
-                }
-                System.out.println("Variacion 24h: " +variacion24h);
-            }
-
+            mostrarMonedas(criptoMoneda);
         } catch (IOException e) {
             System.out.println("Problemas de entrada salida " + e);
         } catch (InterruptedException e) {
             System.out.println("Problemas diversos " + e);
         } catch (RuntimeException e) {
             System.out.println("Otros problemas " + e);
+        }
+    }
+
+    private static void mostrarMonedas(CriptoMoneda[] criptoMoneda) {
+        if (criptoMoneda == null || criptoMoneda.length == 0) {
+            System.out.println("No hay criptos");
+            return;
+        }
+        for (CriptoMoneda moneda1 : criptoMoneda) {
+            String nombre = moneda1.getName();
+            String simbolo = moneda1.getSymbol();
+            String precioDolares = moneda1.getPriceUsd();
+            int ranking = moneda1.getRank();
+            String variacion24h = moneda1.getPercentChange24h();
+            System.out.println("Nombre: " + nombre);
+            System.out.println("Simbolo: " + simbolo);
+            System.out.println("Precio Dolares: " + precioDolares+"$");
+            System.out.println("Ranking: " + ranking);
+            if (variacion24h.startsWith("-")) {
+                variacion24h = "\033[31m" + variacion24h + "\033[0m";
+            } else {
+                variacion24h = "\033[32m" + variacion24h + "\033[0m";
+            }
+            System.out.println("Variacion 24h: " +variacion24h);
         }
     }
 
