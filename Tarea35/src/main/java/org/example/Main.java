@@ -94,9 +94,9 @@ public class Main {
                     .uri(URI.create("https://api.coinlore.net/api/tickers/?start=0&limit=100"))
                     .build();
             String json = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-            CriptoMoneda[] tickers = gson.fromJson(json,CriptoMoneda[].class);
+            Monedas tickers = gson.fromJson(json,Monedas.class);
             ArrayList<Moneda> monedas = new ArrayList<>();
-            for (CriptoMoneda moneda : tickers) {
+            for (CriptoMoneda moneda : tickers.monedas) {
                 monedas.add(new Moneda(moneda.getId(),moneda.getSymbol(),moneda.getName()));
             }
             return Optional.of(monedas);
