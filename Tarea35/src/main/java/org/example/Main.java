@@ -20,7 +20,9 @@ public class Main {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             CriptoMoneda[] criptoMoneda = getCriptoMonedas(moneda, client,monedas);
-            mostrarMonedas(criptoMoneda);
+            if (criptoMoneda!=null) {
+                mostrarMonedas(criptoMoneda);
+            }
         } catch (IOException e) {
             System.out.println("Problemas de entrada salida " + e);
         } catch (InterruptedException e) {
@@ -56,14 +58,19 @@ public class Main {
 
     private static CriptoMoneda[] getCriptoMonedas(String moneda, HttpClient client,ArrayList<Moneda> monedaMap) throws IOException, InterruptedException {
         Gson gson = new Gson();
+        try {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(crearURL(moneda,monedaMap)))
                 .header("Content-Type","application/json")
                 .GET()
                 .build();
-        HttpResponse<String> respuesta = client.send(request,HttpResponse.BodyHandlers.ofString());
-        String json = respuesta.body();
-        return gson.fromJson(json,CriptoMoneda[].class);
+            HttpResponse<String> respuesta = client.send(request,HttpResponse.BodyHandlers.ofString());
+            String json = respuesta.body();
+            return gson.fromJson(json,CriptoMoneda[].class);
+        } catch (RuntimeException e) {
+            System.out.println("Problemas " + e);
+        }
+        return null;
     }
 
     public static String crearURL(String moneda,ArrayList<Moneda> monedaMap) {
