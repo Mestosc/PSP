@@ -4,6 +4,7 @@ import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+import java.io.IOException;
 import java.util.Properties;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -32,6 +33,27 @@ public class Main {
             System.out.println("Mensaje enviado con exito abre la bandeja de entrada en MailTrap");
         } catch (MessagingException e) {
             System.out.println("Error en el mensaje " + e);
+        }
+        Properties properties1 = new Properties();
+        properties1.setProperty("mail.imap.host","imap.mailtrap.io");
+        properties1.setProperty("mail.imap.port","993");
+        properties1.setProperty("mail.imap.ssl.enable","true");
+        Session session1 = Session.getInstance(properties1);
+        try (LectorCorreo correo = new LectorCorreo(session1,LectorCorreo.IMAP)) {
+            if (correo.connect("","")) {
+                correo.leerCorreosRecientes("INBOX").ifPresent(messages1 -> {
+                    int longitud = Math.min(messages1.length,3);
+                    for (int i = 0;i<longitud;i++) {
+                        try {
+                            System.out.println("Asunto " + messages1[i].getSubject());
+                            System.out.println("Remitente " + messages1[i].getFrom()[0]);
+                        } catch (MessagingException e) {
+                            System.out.println("Problemas con los mensajes");
+                        }
+                    }
+                });
+        }} catch (Exception e) {
+            System.out.println("Problemas con el cierre");
         }
     }
 }
