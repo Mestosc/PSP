@@ -16,7 +16,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Moneda> monedas = generarListaMonedasDisponibles().orElseGet(ArrayList::new);
         System.out.print("Introduzca el simbolo o nombre de la moneda: ");
-        String moneda = scanner.next();
+        String moneda = scanner.nextLine();
 
         try (HttpClient client = HttpClient.newHttpClient()) {
             CriptoMoneda[] criptoMoneda = getCriptoMonedas(moneda, client,monedas);
