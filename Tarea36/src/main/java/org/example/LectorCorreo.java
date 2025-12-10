@@ -20,6 +20,9 @@ public class LectorCorreo implements AutoCloseable {
         this(session,storeName);
         connect(userName,password);
     }
+    public LectorCorreo(Session session) {
+        this(session,IMAP);
+    }
     public boolean connect(String userName, String password) {
         try {
             System.out.println("Conectando con usuario: " + userName);
