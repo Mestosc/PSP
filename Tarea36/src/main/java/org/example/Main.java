@@ -53,7 +53,7 @@ public class Main {
                     }
                 });
         }} catch (Exception e) {
-            System.out.println("Problemas con el cierre");
+            System.out.println("Problemas con el cierre " + e);
         }
     }
 }

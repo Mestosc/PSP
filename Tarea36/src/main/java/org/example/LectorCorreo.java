@@ -50,7 +50,7 @@ public class LectorCorreo implements AutoCloseable {
             try {
                 store.close();
             } catch (MessagingException e) {
-                System.out.println("Problemas con el cierre");
+                throw new Exception("Fallo al cerrar la Store");
             }
         }
     }
