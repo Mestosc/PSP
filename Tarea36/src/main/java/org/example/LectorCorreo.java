@@ -6,10 +6,9 @@ import java.util.Optional;
 
 public class LectorCorreo implements AutoCloseable {
     public final static String IMAP = "imap";
-    Store store;
-    Session session;
+    public final static String POP_3 = "pop3";
+    private Store store;
     public LectorCorreo(Session session,String storeName) {
-        this.session = session;
         try {
             this.store = session.getStore(storeName);
         } catch (NoSuchProviderException e) {
