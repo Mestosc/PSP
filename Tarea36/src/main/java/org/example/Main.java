@@ -39,7 +39,7 @@ public class Main {
         properties1.setProperty("mail.imap.port","993");
         properties1.setProperty("mail.imap.ssl.enable","true");
         Session session1 = Session.getInstance(properties1);
-        try (LectorCorreo correo = new LectorCorreo(session1,LectorCorreo.POP_3)) {
+        try (LectorCorreo correo = new LectorCorreo(session1,LectorCorreo.IMAP)) {
             if (correo.connect("","")) {
                 correo.leerCorreosRecientes("INBOX").ifPresent(messages1 -> {
                     int longitud = Math.min(messages1.length,3);
